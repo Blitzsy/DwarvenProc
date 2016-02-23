@@ -15,11 +15,11 @@ import com.github.blitzsy.dwarvenproc.reference.Types.Configuration.Configuratio
 import com.github.blitzsy.dwarvenproc.reference.Types.Event.Events;
 import com.github.blitzsy.dwarvenproc.reference.Types.Potion.Potions;
 import com.github.blitzsy.dwarvenproc.util.PotionUtils;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;

@@ -7,9 +7,11 @@ import com.github.blitzsy.dwarvenproc.util.ProcUtils;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerSelector;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
@@ -21,13 +23,13 @@ import java.util.List;
 public class DwarvenProcCommands implements ICommand
 {
     @Override
-    public String getCommandName()
+    public String getName()
     {
         return Aliases.PROC_COMMAND_ALIASES.get(0);
     }
 
     @Override
-    public List getCommandAliases()
+    public List getAliases()
     {
         return Aliases.PROC_COMMAND_ALIASES;
     }
@@ -35,11 +37,11 @@ public class DwarvenProcCommands implements ICommand
     @Override
     public String getCommandUsage(ICommandSender sender)
     {
-        return getCommandName() + " help";
+        return getName() + " help";
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] args)
+    public void execute(ICommandSender sender, String[] args)
     {
         if (args.length > 0)
         {
@@ -98,21 +100,28 @@ public class DwarvenProcCommands implements ICommand
         if (args.length == 2)
         {
             final String playerName = args[1].trim().toLowerCase();
-            EntityPlayer[] players;
+            List entities;
 
             if (playerName.startsWith("@"))
-                players = PlayerSelector.matchPlayers(sender, args[1]);
+                entities = PlayerSelector.matchEntities(sender, args[1], EntityLivingBase.class);
             else
-                players = new EntityPlayer[] { ProcUtils.findPlayerByName(args[1])};
+                entities = Arrays.asList(ProcUtils.findPlayerByName(args[1]));
 
-            if (players != null && players.length > 0)
+            if (entities != null && entities.size() > 0)
             {
-                for (EntityPlayer player : players)
+                for (Object entityObj : entities)
                 {
-                    if (player != null)
+                    if (entityObj != null && entityObj instanceof EntityLivingBase)
                     {
-                        ProcUtils.giveEntityProc(player);
-                        player.addChatMessage(new ChatComponentTranslation(Commands.GIVE_PROC_OTHER, EnumChatFormatting.WHITE + sender.getCommandSenderName()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+                        EntityLivingBase entity = (EntityLivingBase) entityObj;
+
+                        ProcUtils.giveEntityProc(entity);
+
+                        if (entity instanceof EntityPlayer)
+                        {
+                            EntityPlayer player = (EntityPlayer) entity;
+                            player.addChatMessage(new ChatComponentTranslation(Commands.GIVE_PROC_OTHER, EnumChatFormatting.WHITE + sender.getName()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+                        }
                     }
                 }
             }
@@ -174,13 +183,13 @@ public class DwarvenProcCommands implements ICommand
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender sender)
+    public boolean canCommandSenderUse(ICommandSender sender)
     {
-        return sender.canCommandSenderUseCommand(4, sender.getCommandSenderName());
+        return sender.canUseCommand(4, this.getName());
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender sender, String[] args)
+    public List addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos)
     {
         if (args.length == 1)
             return this.getCommandTabCompletion(args[0]);
@@ -202,9 +211,9 @@ public class DwarvenProcCommands implements ICommand
     {
         if (o instanceof ICommand)
         {
-            ICommand command = (ICommand) o;
+            final ICommand command = (ICommand) o;
 
-            return command.getCommandName().compareTo(this.getCommandName());
+            return this.getName().compareTo(command.getName());
         }
         return 0;
     }

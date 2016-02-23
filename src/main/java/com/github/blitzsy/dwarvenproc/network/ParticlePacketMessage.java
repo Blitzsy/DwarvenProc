@@ -1,11 +1,11 @@
 package com.github.blitzsy.dwarvenproc.network;
 
 import com.github.blitzsy.dwarvenproc.util.VarUtils;
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 
@@ -57,7 +57,7 @@ public class ParticlePacketMessage implements IMessage, IMessageHandler<Particle
         if (ctx.side == Side.CLIENT)
         {
             for (int i = 0; i < message.particleAmount; i++)
-                Minecraft.getMinecraft().theWorld.spawnParticle(message.particleName, message.locationX + VarUtils.RANDOM.nextFloat() * 2, message.locationY + 0.5 + VarUtils.RANDOM.nextFloat() * 2, message.locationZ + VarUtils.RANDOM.nextFloat() * 2 * 2 - 2, VarUtils.RANDOM.nextGaussian() * 0.02D, VarUtils.RANDOM.nextGaussian() * 0.02D, VarUtils.RANDOM.nextGaussian() * 0.02D);
+                Minecraft.getMinecraft().theWorld.spawnParticle(VarUtils.lookupParticleByName(message.particleName), message.locationX + VarUtils.RANDOM.nextGaussian() * 1.0D, message.locationY + VarUtils.RANDOM.nextGaussian() * 1.5D, message.locationZ + VarUtils.RANDOM.nextGaussian() * 1.D, VarUtils.RANDOM.nextGaussian() * 0.05D, VarUtils.RANDOM.nextGaussian() * 0.05D, VarUtils.RANDOM.nextGaussian() * 0.05D);
         }
         return null;
     }

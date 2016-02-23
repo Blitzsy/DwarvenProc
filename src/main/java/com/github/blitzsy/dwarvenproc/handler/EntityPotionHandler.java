@@ -3,7 +3,7 @@ package com.github.blitzsy.dwarvenproc.handler;
 import com.github.blitzsy.dwarvenproc.reference.Settings.Config;
 import com.github.blitzsy.dwarvenproc.reference.Types.Potion.Potions;
 import com.github.blitzsy.dwarvenproc.reference.Types.Translations.Messages;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;

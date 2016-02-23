@@ -6,6 +6,7 @@ import com.github.blitzsy.dwarvenproc.reference.Types.Commands.Aliases;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
@@ -15,13 +16,13 @@ import java.util.List;
 public class KillCountCommands implements ICommand
 {
     @Override
-    public String getCommandName()
+    public String getName()
     {
         return Aliases.KILL_COUNT_COMMAND_ALIASES.get(0);
     }
 
     @Override
-    public List getCommandAliases()
+    public List getAliases()
     {
         return Aliases.KILL_COUNT_COMMAND_ALIASES;
     }
@@ -29,11 +30,11 @@ public class KillCountCommands implements ICommand
     @Override
     public String getCommandUsage(ICommandSender sender)
     {
-        return getCommandName();
+        return getName();
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] args)
+    public void execute(ICommandSender sender, String[] args)
     {
         if (sender instanceof EntityPlayer)
         {
@@ -51,13 +52,13 @@ public class KillCountCommands implements ICommand
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender sender)
+    public boolean canCommandSenderUse(ICommandSender sender)
     {
         return true;
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender sender, String[] args)
+    public List addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos)
     {
         return null;
     }
@@ -73,9 +74,9 @@ public class KillCountCommands implements ICommand
     {
         if (o instanceof ICommand)
         {
-            ICommand command = (ICommand) o;
+            final ICommand command = (ICommand) o;
 
-            return command.getCommandName().compareTo(this.getCommandName());
+            return this.getName().compareTo(command.getName());
         }
         return 0;
     }

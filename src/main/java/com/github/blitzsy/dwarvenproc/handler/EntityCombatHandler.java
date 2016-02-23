@@ -3,7 +3,7 @@ package com.github.blitzsy.dwarvenproc.handler;
 import com.github.blitzsy.dwarvenproc.reference.Settings;
 import com.github.blitzsy.dwarvenproc.reference.Types.Potion.Potions;
 import com.github.blitzsy.dwarvenproc.util.ProcUtils;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

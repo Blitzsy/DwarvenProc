@@ -6,7 +6,7 @@ import com.github.blitzsy.dwarvenproc.configuration.ConfigurationSettings;
 import com.github.blitzsy.dwarvenproc.handler.EntityCombatHandler;
 import com.github.blitzsy.dwarvenproc.handler.EntityPotionHandler;
 import com.github.blitzsy.dwarvenproc.potion.DwarvenProcEffect;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 import java.util.Arrays;
 import java.util.List;

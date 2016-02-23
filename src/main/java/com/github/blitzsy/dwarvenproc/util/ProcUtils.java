@@ -22,8 +22,8 @@ public class ProcUtils
             Wrappers.clientNetworkWrapper.sendToDimension(new ParticlePacketMessage("happyVillager", entity.posX, entity.posY, entity.posZ, 64), entity.dimension);
         }
 
-        entity.addPotionEffect(new PotionEffect(Potions.dwarvenProcEffect.getId(), 3 * 20, 0, false));
-        entity.addPotionEffect(new PotionEffect(Potion.field_76444_x.getId(), 8 * 20, 4, false));
+        entity.addPotionEffect(new PotionEffect(Potions.dwarvenProcEffect.getId(), 3 * 20, 0, false, false));
+        entity.addPotionEffect(new PotionEffect(Potion.absorption.getId(), 8 * 20, 4, false, false));
     }
 
     public static void killEntity(EntityLivingBase attacker, EntityLivingBase attacked)
