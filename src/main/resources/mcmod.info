@@ -1,0 +1,16 @@
+[
+{
+  "modid": "DwarvenProc",
+  "name": "Dwarven Proc",
+  "description": "Recreates the previous incarnation of the proc from Robert \"Urealms\" Moran's Minecraft game Dwarves Vs Zombies.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Blitzsy"],
+  "credits": "Minecraft Developers for making the game to mod, MinecraftForge Developers for making the modding tools to make this, and Robert \"Urealms\" Moran for his Minecraft game Dwarves Vs Zombies.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
