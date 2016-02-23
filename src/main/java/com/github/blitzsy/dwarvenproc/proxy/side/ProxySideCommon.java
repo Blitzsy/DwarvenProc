@@ -14,7 +14,6 @@ import com.github.blitzsy.dwarvenproc.reference.Types.Network.Wrappers;
 import com.github.blitzsy.dwarvenproc.reference.Types.Configuration.Configurations;
 import com.github.blitzsy.dwarvenproc.reference.Types.Event.Events;
 import com.github.blitzsy.dwarvenproc.reference.Types.Potion.Potions;
-import com.github.blitzsy.dwarvenproc.util.PotionUtils;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
@@ -29,8 +28,6 @@ public class ProxySideCommon implements ISidedProxy
     @Override
     public void preInit(FMLPreInitializationEvent event)
     {
-        PotionUtils.resizePotionArray();
-
         Configurations.configurationSettings = new ConfigurationSettings(new File(event.getModConfigurationDirectory(), "dwarvenproc.cfg"));
         Potions.dwarvenProcEffect = new DwarvenProcEffect();
         Events.entityCombatHandler = new EntityCombatHandler();

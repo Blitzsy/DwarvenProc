@@ -16,13 +16,13 @@ import java.util.List;
 public class KillCountCommands implements ICommand
 {
     @Override
-    public String getName()
+    public String getCommandName()
     {
         return Aliases.KILL_COUNT_COMMAND_ALIASES.get(0);
     }
 
     @Override
-    public List getAliases()
+    public List getCommandAliases()
     {
         return Aliases.KILL_COUNT_COMMAND_ALIASES;
     }
@@ -30,11 +30,11 @@ public class KillCountCommands implements ICommand
     @Override
     public String getCommandUsage(ICommandSender sender)
     {
-        return getName();
+        return getCommandName();
     }
 
     @Override
-    public void execute(ICommandSender sender, String[] args)
+    public void processCommand(ICommandSender sender, String[] args)
     {
         if (sender instanceof EntityPlayer)
         {
@@ -52,7 +52,7 @@ public class KillCountCommands implements ICommand
     }
 
     @Override
-    public boolean canCommandSenderUse(ICommandSender sender)
+    public boolean canCommandSenderUseCommand(ICommandSender sender)
     {
         return true;
     }
@@ -70,14 +70,8 @@ public class KillCountCommands implements ICommand
     }
 
     @Override
-    public int compareTo(Object o)
+    public int compareTo(ICommand o)
     {
-        if (o instanceof ICommand)
-        {
-            final ICommand command = (ICommand) o;
-
-            return this.getName().compareTo(command.getName());
-        }
-        return 0;
+        return this.getCommandName().compareTo(o.getCommandName());
     }
 }

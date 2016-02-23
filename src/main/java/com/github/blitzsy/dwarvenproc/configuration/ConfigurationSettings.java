@@ -32,7 +32,6 @@ public class ConfigurationSettings
         Config.allowProcingMobs = configuration.getBoolean(Names.ALLOW_PROCING_MOBS, Groups.RESTRICTION_SETTINGS, Config.allowProcingMobs, Descriptions.ALLOW_PROCING_MOBS);
         Config.procItemNames = Arrays.asList(configuration.getStringList(Names.PROC_ITEM_NAMES, Groups.PROC_SETTINGS, Config.procItemNames.toArray(new String[Config.procItemNames.size()]), Descriptions.PROC_ITEM_NAMES));
         Config.procItemTypes = Arrays.asList(configuration.getStringList(Names.PROC_ITEM_TYPES, Groups.PROC_SETTINGS, Config.procItemTypes.toArray(new String[Config.procItemTypes.size()]), Descriptions.PROC_ITEM_TYPES));
-        Config.dwarvenProcPotionID = configuration.getInt(Names.DWARVEN_PROC_POTION_ID, Groups.PROC_SETTINGS, Config.dwarvenProcPotionID, 50, 255, Descriptions.DWARVEN_PROC_POTION_ID);
         Config.displayProcKillCount = configuration.getBoolean(Names.DISPLAY_PROC_KILL_COUNT, Groups.PROC_SETTINGS, Config.displayProcKillCount, Descriptions.DISPLAY_PRIC_KILL_COUNT);
 
         if (configuration.hasChanged())

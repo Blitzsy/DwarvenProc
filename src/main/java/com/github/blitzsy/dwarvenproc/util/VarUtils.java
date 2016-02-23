@@ -18,7 +18,7 @@ public class VarUtils
     public static EnumParticleTypes lookupParticleByName(String particleName)
     {
         EnumParticleTypes particle = null;
-        final String[] particleNames = EnumParticleTypes.func_179349_a();
+        final String[] particleNames = EnumParticleTypes.getParticleNames();
 
         for (int i = 0; i < particleNames.length; i++)
         {

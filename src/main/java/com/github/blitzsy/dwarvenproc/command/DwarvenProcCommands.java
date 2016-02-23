@@ -23,13 +23,13 @@ import java.util.List;
 public class DwarvenProcCommands implements ICommand
 {
     @Override
-    public String getName()
+    public String getCommandName()
     {
         return Aliases.PROC_COMMAND_ALIASES.get(0);
     }
 
     @Override
-    public List getAliases()
+    public List getCommandAliases()
     {
         return Aliases.PROC_COMMAND_ALIASES;
     }
@@ -37,11 +37,11 @@ public class DwarvenProcCommands implements ICommand
     @Override
     public String getCommandUsage(ICommandSender sender)
     {
-        return getName() + " help";
+        return getCommandName() + " help";
     }
 
     @Override
-    public void execute(ICommandSender sender, String[] args)
+    public void processCommand(ICommandSender sender, String[] args)
     {
         if (args.length > 0)
         {
@@ -120,7 +120,7 @@ public class DwarvenProcCommands implements ICommand
                         if (entity instanceof EntityPlayer)
                         {
                             EntityPlayer player = (EntityPlayer) entity;
-                            player.addChatMessage(new ChatComponentTranslation(Commands.GIVE_PROC_OTHER, EnumChatFormatting.WHITE + sender.getName()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+                            player.addChatMessage(new ChatComponentTranslation(Commands.GIVE_PROC_OTHER, EnumChatFormatting.WHITE + sender.getCommandSenderName()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
                         }
                     }
                 }
@@ -183,9 +183,9 @@ public class DwarvenProcCommands implements ICommand
     }
 
     @Override
-    public boolean canCommandSenderUse(ICommandSender sender)
+    public boolean canCommandSenderUseCommand(ICommandSender sender)
     {
-        return sender.canUseCommand(4, this.getName());
+        return sender.canCommandSenderUseCommand(4, this.getCommandName());
     }
 
     @Override
@@ -207,14 +207,8 @@ public class DwarvenProcCommands implements ICommand
     }
 
     @Override
-    public int compareTo(Object o)
+    public int compareTo(ICommand o)
     {
-        if (o instanceof ICommand)
-        {
-            final ICommand command = (ICommand) o;
-
-            return this.getName().compareTo(command.getName());
-        }
-        return 0;
+        return this.getCommandName().compareTo(o.getCommandName());
     }
 }

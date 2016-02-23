@@ -1,7 +1,5 @@
 package com.github.blitzsy.dwarvenproc.reference;
 
-import com.github.blitzsy.dwarvenproc.util.PotionUtils;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +15,6 @@ public class Settings
         public static boolean allowProcingMobs = false;
         public static List<String> procItemTypes = Arrays.asList("item.sworddiamond", "item.pickaxediamond", "item.hatchetdiamond", "item.shoveldiamond", "item.hoediamond");
         public static List<String> procItemNames = Arrays.asList("dwarven runeblade", "holy blade", "light bringer", "dwarven shovel", "tomb maker", "staff of defile", "excaliju");
-        public static int dwarvenProcPotionID = PotionUtils.getFreePotionIDSlot();
         public static boolean displayProcKillCount = true;
     }
 
@@ -39,7 +36,6 @@ public class Settings
             public static final String ALLOW_PROCING_MOBS = "AllowProcingMobs";
             public static final String PROC_ITEM_TYPES = "ProcItemTypes";
             public static final String PROC_ITEM_NAMES = "ProcItemNames";
-            public static final String DWARVEN_PROC_POTION_ID = "DwarvenProcPotionID";
             public static final String DISPLAY_PROC_KILL_COUNT = "DisplayProcKillCount";
         }
 
@@ -53,7 +49,6 @@ public class Settings
             public static final String ALLOW_PROCING_MOBS = "Setting this to true will allow mobs to gain a proc using a weapon capable of procing.";
             public static final String PROC_ITEM_TYPES = "This is a list of unlocalized item names which can produce a proc, You can get a item by its name by using the /proc item command.";
             public static final String PROC_ITEM_NAMES = "This is a list of names that a item can be renamed to enable it to produce a proc, You can get a item by its name by using the /proc item command.";
-            public static final String DWARVEN_PROC_POTION_ID = "This is the id for the proc potion effect which is required for the 1.7.10 version. This is usually auto generated fine, but can be changed if it conflicts with another mod.";
             public static final String DISPLAY_PRIC_KILL_COUNT = "Setting this to true will enable the kill streak chat message after a proc has worn off.";
         }
     }

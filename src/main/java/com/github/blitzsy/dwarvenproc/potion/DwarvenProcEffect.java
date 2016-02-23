@@ -12,7 +12,7 @@ public class DwarvenProcEffect extends Potion
 {
     public DwarvenProcEffect()
     {
-        super(Config.dwarvenProcPotionID, new ResourceLocation("dwarvenproc"), EffectTypes.DWARVEN_PROC_EFFECT, Colors.DWARVEN_PROC_EFFECT);
+        super(new ResourceLocation("dwarvenproc"), EffectTypes.DWARVEN_PROC_EFFECT, Colors.DWARVEN_PROC_EFFECT);
 
         setPotionName(Names.DWARVEN_PROC_EFFECT);
         setIconIndex(4, 0);
