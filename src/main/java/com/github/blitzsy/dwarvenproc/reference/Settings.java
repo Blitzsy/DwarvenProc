@@ -17,7 +17,7 @@ public class Settings
         public static boolean allowProcingMobs = false;
         public static List<String> procItemTypes = Arrays.asList("item.sworddiamond", "item.pickaxediamond", "item.hatchetdiamond", "item.shoveldiamond", "item.hoediamond");
         public static List<String> procItemNames = Arrays.asList("dwarven runeblade", "holy blade", "light bringer", "dwarven shovel", "tomb maker", "staff of defile", "excaliju");
-        public static int dwarvenProcPotionID = PotionUtils.getFreePotionIDSlot();
+        public static int dwarvenProcPotionID = 89; // PotionUtils.getFreePotionIDSlot();
         public static boolean displayProcKillCount = true;
     }
 
