@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.2.5-1.7.10"
+version = "1.2.6-1.7.10"
 group= "com.github.blitzsy.dwarvenproc" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "DwarvenProc"
 
