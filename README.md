@@ -5,7 +5,7 @@ This is a MinecraftForge mod which recreates the previous incarnation of the pro
 Installation
 -------
 * Download and install MinecraftForge from http://files.minecraftforge.net/ (Requires version 1558 or newer)
-* Download DwarveProc mod from http://minecraft.curseforge.com/projects/dwarven-proc/files/2283777 and place it into your mods folder.
+* Download DwarveProc mod from http://minecraft.curseforge.com/projects/dwarven-proc/files/2283789 and place it into your mods folder.
 
 Building
 -------
