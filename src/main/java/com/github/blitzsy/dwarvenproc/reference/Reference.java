@@ -7,7 +7,7 @@ public class Reference
         public static final String MOD_ID = "DwarvenProc";
         public static final String MOD_NAME = "Dwarven Proc";
         public static final String MOD_VERSION = "@MOD_VERSION";
-        public static final String MOD_DEPENDENCIES = "required-after:Forge@[11.15.1,]";
+        public static final String MOD_DEPENDENCIES = "required-after:Forge@[12.16.1,]";
     }
 
     public static final class SidedProxyInfo

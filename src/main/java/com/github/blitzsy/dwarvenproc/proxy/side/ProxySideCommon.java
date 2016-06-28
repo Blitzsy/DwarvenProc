@@ -9,11 +9,14 @@ import com.github.blitzsy.dwarvenproc.network.ParticlePacketMessage;
 import com.github.blitzsy.dwarvenproc.potion.DwarvenProcEffect;
 import com.github.blitzsy.dwarvenproc.proxy.ISidedProxy;
 import com.github.blitzsy.dwarvenproc.reference.Reference.ModInfo;
+import com.github.blitzsy.dwarvenproc.reference.Settings;
 import com.github.blitzsy.dwarvenproc.reference.Types.Commands.Handlers;
 import com.github.blitzsy.dwarvenproc.reference.Types.Network.Wrappers;
 import com.github.blitzsy.dwarvenproc.reference.Types.Configuration.Configurations;
 import com.github.blitzsy.dwarvenproc.reference.Types.Event.Events;
 import com.github.blitzsy.dwarvenproc.reference.Types.Potion.Potions;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
@@ -42,6 +45,7 @@ public class ProxySideCommon implements ISidedProxy
         MinecraftForge.EVENT_BUS.register(Events.entityCombatHandler);
         MinecraftForge.EVENT_BUS.register(Events.entityPotionHandler);
         Wrappers.clientNetworkWrapper.registerMessage(ParticlePacketMessage.class, ParticlePacketMessage.class, 0, Side.CLIENT);
+        Potion.potionRegistry.register(Settings.Config.dwarvenProcPotionID, new ResourceLocation("DwarvenProc"), Potions.dwarvenProcEffect);
     }
 
     public void fmlLifeCycle(FMLServerStartingEvent event)

@@ -3,13 +3,15 @@ package com.github.blitzsy.dwarvenproc.command;
 import com.github.blitzsy.dwarvenproc.reference.Types.Translations.Messages;
 import com.github.blitzsy.dwarvenproc.reference.Types.Translations.Commands;
 import com.github.blitzsy.dwarvenproc.reference.Types.Commands.Aliases;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
 
@@ -33,32 +35,34 @@ public class KillCountCommands implements ICommand
         return getCommandName();
     }
 
+
     @Override
-    public void processCommand(ICommandSender sender, String[] args)
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException
     {
         if (sender instanceof EntityPlayer)
         {
             final EntityPlayer player = (EntityPlayer) sender;
 
             if (player.getEntityData().hasKey("procStreak"))
-                player.addChatComponentMessage(new ChatComponentTranslation(Messages.CHAT_MESSAGE_PROC_COUNT, EnumChatFormatting.WHITE + String.valueOf(player.getEntityData().getInteger("procStreak"))).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+                player.addChatComponentMessage(new TextComponentTranslation(Messages.CHAT_MESSAGE_PROC_COUNT, TextFormatting.WHITE + String.valueOf(player.getEntityData().getInteger("procStreak"))).setChatStyle(new Style().setColor(TextFormatting.GREEN)));
             else
-                sender.addChatMessage(new ChatComponentTranslation(Commands.NO_PROC_YET).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                sender.addChatMessage(new TextComponentTranslation(Commands.NO_PROC_YET).setChatStyle(new Style().setColor(TextFormatting.RED)));
         }
         else
         {
-            sender.addChatMessage(new ChatComponentTranslation(Commands.PLAYER_NOT_INGAME).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+            sender.addChatMessage(new TextComponentTranslation(Commands.PLAYER_NOT_INGAME).setChatStyle(new Style().setColor(TextFormatting.RED)));
         }
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender sender)
+    public boolean checkPermission(MinecraftServer server, ICommandSender sender)
     {
         return true;
     }
 
+
     @Override
-    public List addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos)
+    public List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos pos)
     {
         return null;
     }
