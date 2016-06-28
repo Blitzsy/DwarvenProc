@@ -4,17 +4,19 @@ import com.github.blitzsy.dwarvenproc.reference.Types.Translations.Commands;
 import com.github.blitzsy.dwarvenproc.reference.Types.Commands.SubCommands;
 import com.github.blitzsy.dwarvenproc.reference.Types.Commands.Aliases;
 import com.github.blitzsy.dwarvenproc.util.ProcUtils;
+import net.minecraft.command.CommandException;
+import net.minecraft.command.EntitySelector;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.command.PlayerSelector;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,13 +37,7 @@ public class DwarvenProcCommands implements ICommand
     }
 
     @Override
-    public String getCommandUsage(ICommandSender sender)
-    {
-        return getCommandName() + " help";
-    }
-
-    @Override
-    public void processCommand(ICommandSender sender, String[] args)
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException
     {
         if (args.length > 0)
         {
@@ -56,19 +52,24 @@ public class DwarvenProcCommands implements ICommand
         }
         else
             displayHelpErrorMessage(sender);
+    }
 
+    @Override
+    public String getCommandUsage(ICommandSender sender)
+    {
+        return getCommandName() + " help";
     }
 
     private void displayHelpErrorMessage(ICommandSender sender)
     {
-        sender.addChatMessage(new ChatComponentTranslation(Commands.BAD_INPUT).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+        sender.addChatMessage(new TextComponentTranslation(Commands.BAD_INPUT).setStyle(new Style().setColor(TextFormatting.RED)));
     }
 
     private void displayCommandHelp(ICommandSender sender)
     {
-        sender.addChatMessage(new ChatComponentTranslation(Commands.HELP_HEADER).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.WHITE)));
-        sender.addChatMessage(new ChatComponentTranslation(Commands.HELP_ITEMINFO).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
-        sender.addChatMessage(new ChatComponentTranslation(Commands.HELP_GIVEPROC).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+        sender.addChatMessage(new TextComponentTranslation(Commands.HELP_HEADER).setStyle(new Style().setColor(TextFormatting.WHITE)));
+        sender.addChatMessage(new TextComponentTranslation(Commands.HELP_ITEMINFO).setStyle(new Style().setColor(TextFormatting.GREEN)));
+        sender.addChatMessage(new TextComponentTranslation(Commands.HELP_GIVEPROC).setStyle(new Style().setColor(TextFormatting.GREEN)));
     }
 
     private void displayCommandItemInfo(ICommandSender sender, String[] args)
@@ -76,22 +77,41 @@ public class DwarvenProcCommands implements ICommand
         if (sender instanceof EntityPlayer)
         {
             final EntityPlayer player = (EntityPlayer) sender;
-            final ItemStack heldItem = player.getHeldItem();
+            final ItemStack heldItemMainhand = player.getHeldItem(EnumHand.MAIN_HAND);
+            final ItemStack heldItemOffhand = player.getHeldItem(EnumHand.OFF_HAND);
 
-            if (heldItem != null)
+            if (heldItemMainhand != null && heldItemOffhand != null)
             {
-                player.addChatComponentMessage(new ChatComponentTranslation(Commands.ITEM_INFO_HEADER).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.WHITE)));
-                player.addChatComponentMessage(new ChatComponentTranslation(Commands.ITEM_INFO_TYPE, " " + EnumChatFormatting.BLUE + heldItem.getUnlocalizedName()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
-                player.addChatComponentMessage(new ChatComponentTranslation(Commands.ITEM_INFO_NAME, " " + EnumChatFormatting.BLUE + heldItem.getDisplayName()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_HEADER).setStyle(new Style().setColor(TextFormatting.WHITE)));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_MAIN_HAND));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_TYPE, " " + TextFormatting.BLUE + heldItemMainhand.getUnlocalizedName()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_NAME, " " + TextFormatting.BLUE + heldItemMainhand.getDisplayName()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_OFF_HAND));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_TYPE, " " + TextFormatting.BLUE + heldItemOffhand.getUnlocalizedName()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_NAME, " " + TextFormatting.BLUE + heldItemOffhand.getDisplayName()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+            }
+            else if (heldItemMainhand != null)
+            {
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_HEADER).setStyle(new Style().setColor(TextFormatting.WHITE)));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_MAIN_HAND));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_TYPE, " " + TextFormatting.BLUE + heldItemMainhand.getUnlocalizedName()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_NAME, " " + TextFormatting.BLUE + heldItemMainhand.getDisplayName()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+            }
+            else if (heldItemOffhand != null)
+            {
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_HEADER).setStyle(new Style().setColor(TextFormatting.WHITE)));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_OFF_HAND));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_TYPE, " " + TextFormatting.BLUE + heldItemOffhand.getUnlocalizedName()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+                player.addChatComponentMessage(new TextComponentTranslation(Commands.ITEM_INFO_NAME, " " + TextFormatting.BLUE + heldItemOffhand.getDisplayName()).setStyle(new Style().setColor(TextFormatting.GREEN)));
             }
             else
             {
-                sender.addChatMessage(new ChatComponentTranslation(Commands.ITEM_NOT_HELD).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                sender.addChatMessage(new TextComponentTranslation(Commands.ITEM_NOT_HELD).setStyle(new Style().setColor(TextFormatting.RED)));
             }
         }
         else
         {
-            sender.addChatMessage(new ChatComponentTranslation(Commands.PLAYER_NOT_INGAME).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+            sender.addChatMessage(new TextComponentTranslation(Commands.PLAYER_NOT_INGAME).setStyle(new Style().setColor(TextFormatting.RED)));
         }
     }
 
@@ -103,7 +123,7 @@ public class DwarvenProcCommands implements ICommand
             List entities;
 
             if (playerName.startsWith("@"))
-                entities = PlayerSelector.matchEntities(sender, args[1], EntityLivingBase.class);
+                entities = EntitySelector.matchEntities(sender, args[1], EntityLivingBase.class);
             else
                 entities = Arrays.asList(ProcUtils.findPlayerByName(args[1]));
 
@@ -120,7 +140,7 @@ public class DwarvenProcCommands implements ICommand
                         if (entity instanceof EntityPlayer)
                         {
                             EntityPlayer player = (EntityPlayer) entity;
-                            player.addChatMessage(new ChatComponentTranslation(Commands.GIVE_PROC_OTHER, EnumChatFormatting.WHITE + sender.getName()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+                            player.addChatMessage(new TextComponentTranslation(Commands.GIVE_PROC_OTHER, TextFormatting.WHITE + sender.getName()).setStyle(new Style().setColor(TextFormatting.GREEN)));
                         }
                     }
                 }
@@ -131,27 +151,26 @@ public class DwarvenProcCommands implements ICommand
             if (sender instanceof EntityPlayer)
             {
                 ProcUtils.giveEntityProc((EntityPlayer) sender);
-                sender.addChatMessage(new ChatComponentTranslation(Commands.GIVE_PROC_SELF).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+                sender.addChatMessage(new TextComponentTranslation(Commands.GIVE_PROC_SELF).setStyle(new Style().setColor(TextFormatting.GREEN)));
             }
             else
             {
-                sender.addChatMessage(new ChatComponentTranslation(Commands.PLAYER_NOT_INGAME).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                sender.addChatMessage(new TextComponentTranslation(Commands.PLAYER_NOT_INGAME).setStyle(new Style().setColor(TextFormatting.RED)));
             }
         }
     }
 
-    private List getPlayerTabCompletes(final String tabCompletetion)
+    private List getPlayerTabCompletes(MinecraftServer server, String tabCompletetion)
     {
         final String tabComplete = tabCompletetion.trim().toLowerCase();
-
-        final String[] users = MinecraftServer.getServer().getConfigurationManager().getAllUsernames();
+        String[] playerNames = server.getPlayerList().getAllUsernames();
 
         if (tabComplete.length() == 0)
-            return Arrays.asList(users);
+            return Arrays.asList(playerNames);
 
-        final List players = new ArrayList();
+        final List<String> players = new ArrayList<String>();
 
-        for (String user : users)
+        for (String user : playerNames)
         {
             if (user.toLowerCase().startsWith(tabComplete))
                 players.add(user);
@@ -182,20 +201,21 @@ public class DwarvenProcCommands implements ICommand
         return completions;
     }
 
+
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender sender)
+    public boolean checkPermission(MinecraftServer server, ICommandSender sender)
     {
         return sender.canCommandSenderUseCommand(4, this.getCommandName());
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos)
+    public List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos pos)
     {
         if (args.length == 1)
             return this.getCommandTabCompletion(args[0]);
         else if (args.length == 2)
             if (args[0].equalsIgnoreCase("give"))
-                return this.getPlayerTabCompletes(args[1]);
+                return this.getPlayerTabCompletes(server, args[1]);
 
         return null;
     }

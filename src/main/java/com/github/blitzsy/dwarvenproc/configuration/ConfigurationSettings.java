@@ -24,6 +24,7 @@ public class ConfigurationSettings
     {
         configuration.load();
 
+        Config.dwarvenProcPotionID = configuration.getInt(Names.DWARVEN_PROC_POTION_ID, Groups.PROC_SETTINGS, Config.dwarvenProcPotionID, 30, 256, Descriptions.DWARVEN_PROC_POTION_ID);
         Config.allowAnyProcItem = configuration.getBoolean(Names.ALLOW_ANY_PROC_ITEM, Groups.RESTRICTION_SETTINGS, Config.allowAnyProcItem, Descriptions.ALLOW_ANY_PROC_ITEM);
         Config.allowAnyItemName = configuration.getBoolean(Names.ALLOW_ANY_ITEM_NAME, Groups.RESTRICTION_SETTINGS, Config.allowAnyItemName, Descriptions.ALLOW_ANY_ITEM_NAME);
         Config.allowBowProc = configuration.getBoolean(Names.ALLOW_BOW_PROC, Groups.RESTRICTION_SETTINGS, Config.allowBowProc, Descriptions.ALLOW_BOW_PROC);
@@ -33,6 +34,7 @@ public class ConfigurationSettings
         Config.procItemNames = Arrays.asList(configuration.getStringList(Names.PROC_ITEM_NAMES, Groups.PROC_SETTINGS, Config.procItemNames.toArray(new String[Config.procItemNames.size()]), Descriptions.PROC_ITEM_NAMES));
         Config.procItemTypes = Arrays.asList(configuration.getStringList(Names.PROC_ITEM_TYPES, Groups.PROC_SETTINGS, Config.procItemTypes.toArray(new String[Config.procItemTypes.size()]), Descriptions.PROC_ITEM_TYPES));
         Config.displayProcKillCount = configuration.getBoolean(Names.DISPLAY_PROC_KILL_COUNT, Groups.PROC_SETTINGS, Config.displayProcKillCount, Descriptions.DISPLAY_PRIC_KILL_COUNT);
+        Config.allowOffhandProc = configuration.getBoolean(Names.ALLOW_OFFHAND_PROC, Groups.RESTRICTION_SETTINGS, Config.allowOffhandProc, Descriptions.ALLOW_OFFHAND_PROC);
 
         if (configuration.hasChanged())
             configuration.save();
