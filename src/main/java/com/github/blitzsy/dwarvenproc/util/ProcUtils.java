@@ -8,22 +8,19 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 
 public class ProcUtils
 {
     public static void giveEntityProc(EntityLivingBase entity)
     {
-        if (!entity.worldObj.isRemote)
-        {
-            entity.worldObj.playSoundAtEntity(entity, "mob.wither.hurt", 1.0f, 0.1f);
-            Wrappers.clientNetworkWrapper.sendToDimension(new ParticlePacketMessage("happyVillager", entity.posX, entity.posY, entity.posZ, 64), entity.dimension);
-        }
-
-        entity.addPotionEffect(new PotionEffect(Potions.dwarvenProcEffect.getId(), 3 * 20, 0, false, false));
-        entity.addPotionEffect(new PotionEffect(Potion.absorption.getId(), 8 * 20, 4, false, false));
+        Wrappers.clientNetworkWrapper.sendToDimension(new ParticlePacketMessage("happyVillager", entity.posX, entity.posY, entity.posZ, 64), entity.dimension);
+        entity.worldObj.playSound(null, entity.getPosition(), VarUtils.getSoundByName("entity.wither.hurt"), SoundCategory.PLAYERS, 1.0f, 0.1f);
+        entity.addPotionEffect(new PotionEffect(Potions.dwarvenProcEffect, 3 * 20, 0, false, false));
+        entity.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("absorption"), 8 * 20, 4, false, false));
     }
 
     public static void killEntity(EntityLivingBase attacker, EntityLivingBase attacked)
@@ -81,7 +78,7 @@ public class ProcUtils
     {
         EntityPlayer player = null;
 
-        for (WorldServer worldServer : MinecraftServer.getServer().worldServers)
+        for (WorldServer worldServer : DimensionManager.getWorlds())
         {
             player = worldServer.getPlayerEntityByName(name);
 

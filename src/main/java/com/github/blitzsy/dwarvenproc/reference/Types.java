@@ -91,6 +91,8 @@ public class Types
             public static final String ITEM_INFO_HEADER = "dwarvenproc.command.item.infoheader";
             public static final String ITEM_INFO_TYPE = "dwarvenproc.command.item.weaponnameinfo";
             public static final String ITEM_INFO_NAME = "dwarvenproc.command.item.displaynameinfo";
+            public static final String ITEM_INFO_MAIN_HAND = "dwarvenproc.command.item.mainhand";
+            public static final String ITEM_INFO_OFF_HAND = "dwarvenproc.command.item.offhand";
             public static final String ITEM_NOT_HELD = "dwarvenproc.command.item.noitemheld";
             public static final String PLAYER_NOT_INGAME = "dwarvenproc.command.notIngame";
             public static final String GIVE_PROC_OTHER = "dwarvenproc.command.give.other";

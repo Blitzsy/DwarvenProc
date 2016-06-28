@@ -7,6 +7,7 @@ public class Settings
 {
     public static final class Config
     {
+        public static int dwarvenProcPotionID = 66;
         public static boolean allowAnyProcItem = false;
         public static boolean allowAnyItemName = false;
         public static boolean allowBowProc = true;
@@ -16,6 +17,7 @@ public class Settings
         public static List<String> procItemTypes = Arrays.asList("item.sworddiamond", "item.pickaxediamond", "item.hatchetdiamond", "item.shoveldiamond", "item.hoediamond");
         public static List<String> procItemNames = Arrays.asList("dwarven runeblade", "holy blade", "light bringer", "dwarven shovel", "tomb maker", "staff of defile", "excaliju");
         public static boolean displayProcKillCount = true;
+        public static boolean allowOffhandProc = false;
     }
 
     public static final class Info
@@ -37,6 +39,8 @@ public class Settings
             public static final String PROC_ITEM_TYPES = "ProcItemTypes";
             public static final String PROC_ITEM_NAMES = "ProcItemNames";
             public static final String DISPLAY_PROC_KILL_COUNT = "DisplayProcKillCount";
+            public static final String ALLOW_OFFHAND_PROC = "AllowOffhandProc";
+            public static final String DWARVEN_PROC_POTION_ID = "DwarvenProcPotionID";
         }
 
         public static final class Descriptions
@@ -50,6 +54,8 @@ public class Settings
             public static final String PROC_ITEM_TYPES = "This is a list of unlocalized item names which can produce a proc, You can get a item by its name by using the /proc item command.";
             public static final String PROC_ITEM_NAMES = "This is a list of names that a item can be renamed to enable it to produce a proc, You can get a item by its name by using the /proc item command.";
             public static final String DISPLAY_PRIC_KILL_COUNT = "Setting this to true will enable the kill streak chat message after a proc has worn off.";
+            public static final String ALLOW_OFFHAND_PROC = "Setting this to false will disable the ability for the offhand to be able to produce procs.";
+            public static final String DWARVEN_PROC_POTION_ID = "The id that the potion is being registered. This can be changed if it conflicts with another mod's potion id.";
         }
     }
 }
