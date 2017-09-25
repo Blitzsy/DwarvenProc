@@ -1,6 +1,6 @@
 [
 {
-  "modid": "DwarvenProc",
+  "modid": "dwarvenproc",
   "name": "Dwarven Proc",
   "description": "Recreates the previous incarnation of the proc from Robert \"Urealms\" Moran's Minecraft game Dwarves Vs Zombies.",
   "version": "${version}",
