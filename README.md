@@ -1,11 +1,11 @@
-Dwarven Proc - Minecraft 1.8.9
+Dwarven Proc - Minecraft 1.11
 =============
 This is a MinecraftForge mod which recreates the previous incarnation of the proc (Powerful Rampage of Course!) from Robert "Urealms" Moran's Minecraft Game called Dwarves vs Zombies.
 
 Installation
 -------
-* Download and install MinecraftForge from http://files.minecraftforge.net/ (Requires version 1761 or newer)
-* Download DwarveProc mod from http://minecraft.curseforge.com/projects/dwarven-proc/files/2283780 and place it into your mods folder.
+* Download and install MinecraftForge from http://files.minecraftforge.net/ (Requires version 2189 or newer)
+* Download DwarvenProc mod from https://minecraft.curseforge.com/projects/dwarven-proc/files/2483930 and place it into your mods folder.
 
 Building
 -------

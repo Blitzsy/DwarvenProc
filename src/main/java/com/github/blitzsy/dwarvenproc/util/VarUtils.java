@@ -1,6 +1,8 @@
 package com.github.blitzsy.dwarvenproc.util;
 
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
 import java.util.Random;
 import java.util.regex.Pattern;
@@ -15,18 +17,18 @@ public class VarUtils
         return patternControlCode.matcher(str).replaceAll("");
     }
 
-    public static EnumParticleTypes lookupParticleByName(String particleName)
+    public static SoundEvent getSoundByName(String soundName)
     {
-        EnumParticleTypes particle = null;
-        final String[] particleNames = EnumParticleTypes.getParticleNames();
+        SoundEvent soundEvent = null;
 
-        for (int i = 0; i < particleNames.length; i++)
+        for (ResourceLocation resourceLocation: SoundEvent.REGISTRY.getKeys())
         {
-            if (particleNames[i].equalsIgnoreCase(particleName))
+            if (resourceLocation.getResourcePath().equalsIgnoreCase(soundName))
             {
-                particle = EnumParticleTypes.getParticleFromId(i);
+                soundEvent = SoundEvent.REGISTRY.getObject(resourceLocation);
             }
         }
-        return particle;
+
+        return soundEvent;
     }
 }
